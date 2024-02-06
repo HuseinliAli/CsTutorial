@@ -1,50 +1,29 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using MernisServiceReference;
+using System.Net.WebSockets;
 
 namespace Business.Concrete;
-public class CitizenManager : IApplicantService
+public class CitizenManager : IApplicantService<Citizen>
 {
-
-    public void ApplyForMask(Citizen citizen)
-    {
-    }
-
-    public List<Citizen> GetList()
-    {
-        return null;
-    }
-
-    public bool CheckPerson(Citizen citizen)
-    {
-        return true;
-    }
-}
-
-public class ForeignerManager : IApplicantService
-{
-    public void ApplyForMask(Citizen citizen)
+    public void ApplyForMask(Citizen person)
     {
         throw new NotImplementedException();
     }
 
-    public bool CheckPerson(Citizen citizen)
+    public bool CheckPerson(Citizen person)
     {
-        throw new NotImplementedException();
+        KPSPublicSoapClient client = new(KPSPublicSoapClient.EndpointConfiguration.KPSPublicSoap);
+
+        return client.TCKimlikNoDogrulaAsync(
+                    person.NationalIdentityNumber,
+                    person.Name,
+                    person.LastName,
+                    person.BirthYear).Result.Body.TCKimlikNoDogrulaResult;
     }
 
     public List<Citizen> GetList()
     {
         throw new NotImplementedException();
-    }
-}
-
-public class PttManager(IApplicantService applicantService)
-{
-    public void GiveMask(Citizen citizen)
-    {
-        if (applicantService.CheckPerson(citizen))
-        {
-            Console.WriteLine(citizen.Name);
-        }
     }
 }

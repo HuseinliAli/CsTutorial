@@ -6,9 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Business.Abstract;
-public interface IApplicantService
+public interface IApplicantService<T>
+    where T : Person
 {
-    void ApplyForMask(Citizen citizen);
-    List<Citizen> GetList();
-    bool CheckPerson(Citizen citizen);
+    void ApplyForMask(T person);
+    List<T> GetList();
+    bool CheckPerson(T person);
 }
