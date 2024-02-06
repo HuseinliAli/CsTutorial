@@ -12,3 +12,4 @@ public class Citizen
     public int BirthYear { get; set; }
     public string NationalIdentityNumber { get; set; }
 }
+public class Fore
