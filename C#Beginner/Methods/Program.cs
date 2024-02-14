@@ -9,8 +9,8 @@
             int x;
             int y = 20;
             //var result = Sum(ref x, y);
-            var result = Sum(out x, y);
-            Console.WriteLine(x);
+            var result = Sum(10,20,30,40,50,60,70,70,80,80,80);
+            
             Console.WriteLine(result);
         }
         static void Add()
@@ -25,6 +25,17 @@
         {
             x=30;
             return x+y;
+        }
+
+        static int Sum(params int[] x)
+        {
+            var sum = 0;
+
+            foreach (var y in x)
+            {
+                sum+=y;
+            }
+            return sum;
         }
     }
 }
