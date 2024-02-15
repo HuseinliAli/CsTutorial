@@ -21,6 +21,7 @@ namespace DataAccess.Concretes.Contexts
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
         }
 
+     
         public DbSet<Course> Courses { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
